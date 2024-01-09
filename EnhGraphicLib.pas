@@ -14,7 +14,7 @@ interface
   {$DEFINE HAS_VCL}
 {$ENDIF}
 
-uses windows, SysUtils,vcl.Graphics, rolloverObj,math, Vcl.Imaging.jpeg ,GDIPAPI,
+uses windows, SysUtils,vcl.Graphics, math, Vcl.Imaging.jpeg ,GDIPAPI,
    {$IF HAS_FMX}PngImage,{$ENDIF}
      GDIPOBJ;
 

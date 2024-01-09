@@ -157,7 +157,7 @@ function color2RGBHex(color: integer): string;
 
 {$IFDEF DCC}
 procedure DownloadJPG(url:string;Bitmap: TBitmap);
-function DownloadFile(url:string):string;
+function DownloadFile(url:string):UTF8String;
 function DownloadToFile(url,Filename:string):boolean;
 function NewDownloadFile(SourceFile, DestFile: string): Boolean;
 {$ENDIF}
@@ -1979,9 +1979,9 @@ begin
 
 end;
 
-function DownloadFile(url:string):string;
+function DownloadFile(url:string):UTF8String;
 var
-  strStream: String;
+  strStream: UTF8String;
   memStream: TMemoryStream;
   tempstrings: TStringList;
   idHTTP1: TidHTTP;
@@ -1989,12 +1989,14 @@ var
 begin
   idHTTP1:=TidHTTP.Create(nil);
   idHTTP1.ReadTimeout:=5000;
+  IdHTTP1.Request.CharSet := 'utf-8';
   tempstrings:=TStringList.Create;
   result:='';
 
   sucess:=true;
   try
-    strStream := idhttp1.Get(url);
+    //strStream:= TStringStream.Create(idhttp1.Get(url), TEncoding.UTF8, true);
+    strStream:=idhttp1.Get(url);
   except
     result:='ERROR';
     logwrite('Error Downloading');
